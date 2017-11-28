@@ -74,7 +74,7 @@ app.post('/ajax', (req,res)=>{
 //Database
 
 
-var uri = "mongodb://Spliomix:gigabyte1@ds019498.mlab.com:19498/sticker";
+var uri = 0;//type the database link here
 /*
 mongodb.MongoClient.connect(uri, function(err, db) {
   if (err) throw err;
