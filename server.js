@@ -91,3 +91,69 @@ app.listen(3000, function () {
 
 
 module.exports = app;
+
+
+app.post('/ajax', (req,res)=>{
+    console.log(req.body)  //your variables are here.
+    res.status(200).json({msg:'OK'});
+
+});
+//Database
+
+
+var uri = 0;//type the database link here
+/*
+mongodb.MongoClient.connect(uri, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
+*/
+
+//mongooseMlab();
+
+var promise = mongoose.connect(uri, {useMongoClient: true});
+var Schema = mongoose.Schema;
+
+var userDataSchema = new Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+}, {collection: 'user-data'});
+
+var UserData = promise.model('UserData', userDataSchema);
+
+app.get('/get-data', function(req, res, next) {
+  UserData.find()
+      .then(function(doc) {
+        res.render('register', {items: doc});
+      });
+});
+
+app.post('/register', function(req, res, next) {
+  var item = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+
+  var data = new UserData(item);
+  data.save();
+
+  res.render(__dirname + '/views/register.hbs');
+  
+});
+
+
+app.post('/update', function(req, res, next) {
+  var id = req.body.id;
+
+  UserData.findById(id, function(err, doc) {
+    if (err) {
+      console.error('error, no entry found');
+    }
+    doc.username = req.body.username;
+    doc.password = req.body.password;
+    doc.save();
+  })
+   res.render(__dirname + '/views/register.hbs');
+});
+
