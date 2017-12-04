@@ -51,18 +51,20 @@ router.get('/get-data', function(req, res, next) {
 router.get('/window', function(req, res){
   actURL = url.parse(req.url, true);
   if (req.isAuthenticated()){
-    textdb.find({'email' : req.user.email}, function(err, result){
+   textdb.find({$and:[{'email' : req.user.email },
+                       {'website' : actURL.search }]} 
+                       , function(err, result){
        if(err)throw err;
        res.render('shop/window', {items: result});
   });}else {
      res.render('shop/window');            
    }});
-
 router.post('/window', function(req, res){
-    textdb.find({'email' : req.user.email}, function(err, result){
+    textdb.find({$and:[{'email' : req.user.email },
+                       {'website' : actURL.search }]} 
+                       , function(err, result){
        if(err)throw err;
        res.render('shop/window', {items: result});
-
   });
     setTimeout(function () {
   oldURL=actURL;
