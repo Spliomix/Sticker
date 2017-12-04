@@ -28,7 +28,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
-    "stripe": "^4.7.0"
+    "stripe": "^4.7.0",
+    "url": ""
   },
   "engines": {
     "node": "8.x"
