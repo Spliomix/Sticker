@@ -1,0 +1,20 @@
+.api{
+    font-weight: bold;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;   
+    z-index: 102;
+  }
+  #resizable {
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    border: 3px solid #ccc;
+  
+  
+    z-index: 103;
+  }
+
+.ui-resizable-helper { border: 1px solid rgb(0, 0, 0);  }
